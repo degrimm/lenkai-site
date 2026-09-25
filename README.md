@@ -7,7 +7,7 @@ The website of Lenkai Christian School, Kimana, Kajiado County, Kenya. A hand-bu
 - `src/pages/*.html`: one file per page. Each starts with a header comment (title, description, path, nav key); the rest is the page body.
 - `src/styles.css`: the whole design system (shuka indigo, marigold, clay; Newsreader and Archivo).
 - `build.py`: wraps each page in the shared header, footer and phone action bar, and writes `public/`. The phone number, WhatsApp link and email are set once at the top of this file.
-- `public/`: the built site. This is what gets hosted.
+- `public/`: the built site (not committed). GitHub Actions runs `build.py` on every push to `main` and deploys `public/` to GitHub Pages; see `.github/workflows/pages.yml`.
 
 ## Build and preview
 

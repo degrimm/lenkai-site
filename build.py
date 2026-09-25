@@ -18,6 +18,7 @@ nav and the sitemap.
 Usage: python3 build.py
 """
 import html
+import os
 import re
 import shutil
 from datetime import date
@@ -27,6 +28,10 @@ ROOT = Path(__file__).parent
 SRC = ROOT / "src"
 OUT = ROOT / "public"
 SITE_URL = "https://www.lenkaichristianschool.org"
+# While the site is served from a sub-path (degrimm.github.io/lenkai-site/),
+# SITE_BASE is set to that path; root-relative links are rewritten to it and
+# the pages ask search engines not to index them. Empty on the real domain.
+BASE = os.environ.get("SITE_BASE", "").rstrip("/")
 PHONE = "+254 725 501 002"
 PHONE_HREF = "tel:+254725501002"
 EMAIL = "info@lenkaichristianschool.org"
@@ -206,7 +211,11 @@ def main():
         if meta["nav"] == "404":
             dest = OUT / "404.html"
         dest.parent.mkdir(parents=True, exist_ok=True)
-        dest.write_text(render(meta, body))
+        out = render(meta, body)
+        if BASE:
+            out = re.sub(r'(href|src)="/(?!/)', rf'\1="{BASE}/', out)
+            out = out.replace('<meta name="theme-color"', '<meta name="robots" content="noindex">\n<meta name="theme-color"')
+        dest.write_text(out)
         if meta["nav"] not in DRAFTS and meta["nav"] != "404":
             urls.append(SITE_URL + meta["path"])
         print("built", dest.relative_to(ROOT))
