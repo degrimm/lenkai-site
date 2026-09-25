@@ -47,9 +47,9 @@ NAV = [
     ("home", "Home", "/"),
     ("about", "About", "/about/"),
     ("admissions", "Admissions", "/admissions/"),
-    ("rescue", "Rescue Centre", "/rescue-centre/"),
     ("team", "Our Team", "/our-team/"),
     ("contact", "Contact", "/contact/"),
+    ("give", "Support Lenkai", "/give/"),
 ]
 DRAFTS = {"team"}  # built, but not linked or listed until the staff roll is confirmed
 
@@ -73,8 +73,7 @@ def nav_html(current: str) -> str:
             continue
         cur = ' aria-current="page"' if key == current else ""
         items.append(f'<a href="{href}"{cur}>{label}</a>')
-    give_cur = ' aria-current="page"' if current == "give" else ""
-    items.append(f'<a href="/give/" class="give"{give_cur}>Give</a>')
+    items.append(f'<a href="/admissions/" class="give">Join Lenkai</a>')
     return "\n      ".join(items)
 
 
@@ -148,13 +147,13 @@ def render(meta, body):
       <div>
         <h2 class="footer__h">For parents</h2>
         <ul>
-          {footer_links([("Admissions", "/admissions/"), ("Curriculum", "/about/#curriculum"), ("Visit the school", "/contact/")])}
+          {footer_links([("Admissions", "/admissions/"), ("Classes we teach", "/about/#curriculum"), ("Fees", "/admissions/#fees"), ("Visit the school", "/contact/")])}
         </ul>
       </div>
       <div>
-        <h2 class="footer__h">For supporters</h2>
+        <h2 class="footer__h">The school</h2>
         <ul>
-          {footer_links([("Rescue centre", "/rescue-centre/"), ("Ways to give", "/give/"), ("Our leadership", "/about/#leadership")])}
+          {footer_links([("About Lenkai", "/about/"), ("Our leadership", "/about/#leadership"), ("Rescue centre", "/rescue-centre/"), ("Support Lenkai", "/give/")])}
         </ul>
       </div>
       <div>
@@ -176,7 +175,7 @@ def render(meta, body):
 <nav class="actionbar" aria-label="Quick contact">
   <a class="ab-call" href="{PHONE_HREF}">{ICON_PHONE}Call</a>
   <a class="ab-wa" href="{WA_HREF}">{ICON_WA}WhatsApp</a>
-  <a class="ab-give" href="/give/">Give</a>
+  <a class="ab-give" href="/admissions/">Admissions</a>
 </nav>
 <script>
 (function(){{
