@@ -812,3 +812,12 @@ html{ scroll-padding-top: 90px; }
 .person__role{ color: var(--indigo); }  /* clay is reserved for the rescue thread */
 .pagehead .btn--ghost{ border-color: var(--on-ink-line); color: var(--on-ink); }
 .pagehead .btn--ghost:hover{ border-color: var(--marigold); color: var(--marigold); }
+
+/* photo gallery */
+.gallery{ display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+.photo{ margin: 0; display: grid; gap: 10px; align-content: start; }
+.photo--wide{ grid-column: 1 / -1; }
+.photo img{ width: 100%; height: auto; display: block; border-radius: 3px; background: var(--tint); }
+.photo figcaption{ font-size: .95rem; color: var(--text-2); }
+.photo figcaption strong{ color: var(--text); }
+@media (max-width: 700px){ .gallery{ grid-template-columns: 1fr; } }

@@ -34,7 +34,7 @@ SITE_URL = "https://www.lenkaichristianschool.org"
 BASE = os.environ.get("SITE_BASE", "").rstrip("/")
 PHONE = "+254 725 501 002"
 PHONE_HREF = "tel:+254725501002"
-EMAIL = "info@lenkaichristianschool.org"
+EMAIL = "lenkaischool@yahoo.com"  # the address on the school's approved Weebly site
 # WhatsApp goes to the same number. It is a personal phone that the old
 # Weebly site already publishes; swap all three lines when the school
 # gets a dedicated line.
@@ -46,12 +46,11 @@ ICON_WA = '<svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path
 NAV = [
     ("home", "Home", "/"),
     ("about", "About", "/about/"),
-    ("admissions", "Admissions", "/admissions/"),
-    ("team", "Our Team", "/our-team/"),
+    ("photos", "Photos", "/photos/"),
     ("contact", "Contact", "/contact/"),
     ("give", "Support Lenkai", "/give/"),
 ]
-DRAFTS = {"team"}  # built, but not linked or listed until the staff roll is confirmed
+DRAFTS = set()  # pages built to public/_drafts/, kept out of the nav and sitemap
 
 
 def parse(page: Path):
@@ -73,7 +72,8 @@ def nav_html(current: str) -> str:
             continue
         cur = ' aria-current="page"' if key == current else ""
         items.append(f'<a href="{href}"{cur}>{label}</a>')
-    items.append(f'<a href="/admissions/" class="give">Join Lenkai</a>')
+    adm = ' aria-current="page"' if current == "admissions" else ""
+    items.append(f'<a href="/admissions/" class="give"{adm}>Admissions</a>')
     return "\n      ".join(items)
 
 
@@ -142,7 +142,7 @@ def render(meta, body):
       <div>
         <h2 class="footer__h">Lenkai Christian School</h2>
         <p class="footer__slogan">Empowering minds &middot; Transforming lives</p>
-        <p class="footer__motto">&ldquo;Train up a child in the way she should go, and when she is old she will not depart from it.&rdquo; <span class="footer__cite">Proverbs 22:6</span></p>
+        <p class="footer__motto">&lsquo;Train up a child in the way she/he should go, and when she/he is old she/he will not depart from it.&rsquo; <span class="footer__cite">Proverbs 22:6</span></p>
       </div>
       <div>
         <h2 class="footer__h">For parents</h2>
