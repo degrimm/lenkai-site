@@ -25,11 +25,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      # Sub-path while on degrimm.github.io/lenkai-site. Set SITE_BASE to ""
-      # (and add the custom domain in Settings → Pages) once the domain works.
+      # Served at the root of lenkaichristianschool.org (custom domain in
+      # Settings → Pages), so no sub-path.
       - run: python3 build.py
         env:
-          SITE_BASE: /lenkai-site
+          SITE_BASE: ""
       - uses: actions/upload-pages-artifact@v3
         with:
           path: public
